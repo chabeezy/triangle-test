@@ -1,6 +1,13 @@
-import { useEffect, useState} from 'react';
+import { useEffect, useState, useCallback} from 'react';
 import { Stage, Layer, Line } from "react-konva";
 import { circle, point } from '@flatten-js/core';
+
+const dummyTriangle = {
+    width: 200,
+    height: 150,
+    points: [0, 0, 0, 200, 1, 150]
+};
+
 
 const TriangleGraphic = ({lengths}) => {
     const width = 210;
@@ -21,7 +28,7 @@ const TriangleGraphic = ({lengths}) => {
         })
     }
 
-    const generateTriangle = () => {
+    const generateTriangle = useCallback(() => {
         lengths.sort((a, b) => a - b);
 
         const p1 = point(0, 0);
@@ -34,11 +41,7 @@ const TriangleGraphic = ({lengths}) => {
 
         // If we have an invalid triangle, return a dummy triangle that won't be shown.
         if(ip.length === 0) {
-            return {
-                width: 200,
-                height: 150,
-                points: [0, 0, 0, 200, 1, 150]
-            }
+            return dummyTriangle;
         }
 
         const p3 = point(ip[0].x, Math.abs(ip[0].y));
@@ -62,10 +65,10 @@ const TriangleGraphic = ({lengths}) => {
             height: p3.y,
             points:[p1.x, p1.y, p2.x, p2.y, p3.x, -p3.y]
         };
-    }
+    }, [lengths])
 
-    const [triangle, setTriangle] = useState(generateTriangle(lengths));
-    useEffect(() => {setTriangle(generateTriangle(lengths))}, [lengths]);
+    const [triangle, setTriangle] = useState(dummyTriangle);
+    useEffect(() => {setTriangle(generateTriangle(lengths))}, [lengths, generateTriangle]);
 
     const containerStyle = {
         width: `${width}px`,
