@@ -1,8 +1,8 @@
-import TriangleForm from './TriangleForm';
+import TriangleCalculator from './TriangleCalculator';
 
 function App() {
   return (
-    <TriangleForm />
+    <TriangleCalculator />
   );
 }
 export default App;
