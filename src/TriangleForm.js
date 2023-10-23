@@ -1,9 +1,4 @@
-import { useForm } from 'react-hook-form';
-
-const TriangleForm = ({onSubmit}) => {
-    const { register, handleSubmit, formState } = useForm({
-        mode: "onBlur"
-    });
+const TriangleForm = ({onSubmit, register, handleSubmit, formState}) => {
 
     const { errors } = formState;
 
@@ -19,28 +14,24 @@ const TriangleForm = ({onSubmit}) => {
         <>
         <div className="card">
             <div className="card-body">
-                <h5 className="card-title">Triangle Test</h5>
+                <h5 className="card-title">Enter Dimensions</h5>
 
-                <form onSubmit={handleSubmit(onSubmit)} noValidate className="needs-validation">
+                <form onSubmit={handleSubmit(onSubmit)} noValidate className="needs-validation" id="dimensions-form">
                     <div className="form-group row mt-3">
-                        <div className="col mb-3">
-                            <input {...register("x", validation)} placeholder="X" className='form-control' valid={errors.x?false:true} />
-                            <p className="text-danger">{errors.x?.message}</p>
-                        </div>
-
-                        <div className="col mb-3">
-                            <input {...register("y", validation)} placeholder="Y" className='form-control' />
-                            <p className="text-danger">{errors.y?.message}</p>
+                        <div className="col">
+                            <input {...register("x", validation)} placeholder="X" className='form-control' data-testid="x-field"/>
+                            <p className="text-danger" data-testid="x-error">{errors.x?.message}</p>
                         </div>
 
                         <div className="col">
-                            <input {...register("z", validation)} placeholder="Z" className='form-control' />
-                            <p className="text-danger">{errors.z?.message}</p>
+                            <input {...register("y", validation)} placeholder="Y" className='form-control' data-testid="y-field"/>
+                            <p className="text-danger" data-testid="y-error">{errors.y?.message}</p>
                         </div>
-                    </div>
 
-                    <div className="text-center">
-                        <button className="btn btn-primary" type="submit">Submit</button>
+                        <div className="col">
+                            <input {...register("z", validation)} placeholder="Z" className='form-control' data-testid="z-field"/>
+                            <p className="text-danger" data-testid="z-error">{errors.z?.message}</p>
+                        </div>
                     </div>
                 </form>
             </div>

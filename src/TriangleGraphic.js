@@ -77,8 +77,8 @@ const TriangleGraphic = ({lengths}) => {
 
     return (
         <>
-        <div className="mx-auto" style={containerStyle}>
-            <Stage width={width} height={height}>
+        <div className="mx-auto" style={containerStyle} data-testid="triangle-container">
+            <Stage role="triangle-canvas" width={width} height={height}>
                 <Layer>
                     <Line
                         x={(width - triangle.width) / 2}
