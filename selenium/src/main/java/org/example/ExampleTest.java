@@ -8,10 +8,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.time.Duration;
 
-public class Main {
+public class ExampleTest {
 
     @Test
-    public void test() {
+    public void testEquilateralIsOutput() {
         WebDriver driver = new ChromeDriver();
 
         driver.get("http://localhost:3000/");
